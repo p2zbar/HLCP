@@ -1,0 +1,46 @@
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/atotto/clipboard"
+	"github.com/micmonay/keybd_event"
+)
+
+func main() {
+	fmt.Println("Programme en cours d'exécution... Sélectionnez du texte pour le copier automatiquement.")
+
+	// Initialiser le clavier virtuel
+	kb, err := keybd_event.NewKeyBonding()
+	if err != nil {
+		fmt.Println("Erreur lors de l'initialisation du clavier :", err)
+		return
+	}
+
+	// Configurer la touche Ctrl et 'C'
+	kb.SetKeys(keybd_event.VK_C)
+	kb.HasCTRL(true) // Ajoute la touche Ctrl
+
+	for {
+		// Simuler Ctrl + C pour copier le texte sélectionné
+		err = kb.Launching()
+		if err != nil {
+			fmt.Println("Erreur lors de l'envoi de la commande Ctrl+C :", err)
+		}
+
+		// Récupérer le contenu du presse-papier
+		time.Sleep(500 * time.Millisecond) // Pause pour attendre que le texte soit copié
+		text, err := clipboard.ReadAll()
+		if err != nil {
+			fmt.Println("Erreur lors de la lecture du presse-papier :", err)
+			continue
+		}
+
+		// Afficher le texte copié
+		fmt.Println("Texte copié :", text)
+
+		// Pause avant la prochaine vérification
+		time.Sleep(2 * time.Second)
+	}
+}

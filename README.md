@@ -14,7 +14,7 @@ HLCP (Highlight Copier) is a Windows application that automatically copies highl
 
 ## Installation
 ### Precompiled Executable
-1. Download the precompiled `HLCP.exe` file from the [Releases](#) section.
+1. Download the precompiled `HLCP.exe` file from [https://github.com/p2zbar/HLCP/releases/tag/hlcp](#)
 2. Place the executable in your desired directory.
 3. Run the program to start monitoring clipboard activity.
 
